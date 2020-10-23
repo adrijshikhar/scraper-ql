@@ -1,4 +1,5 @@
+/* eslint-disable no-undef */
 
 const config = { port: process.env.APP_PORT || 4000 };
 
-export default config;
+modules.export = config;

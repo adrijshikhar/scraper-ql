@@ -1,8 +1,8 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-import config from './config/config';
+const config = require('./config/config');
 
 const app = express();
 
@@ -15,5 +15,6 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 
 app.listen(config.port, () => {
-    console.info(`App is listening on port ${config.port}`);
+  // eslint-disable-next-line no-console
+  console.info(`App is listening on port ${config.port}`);
 });

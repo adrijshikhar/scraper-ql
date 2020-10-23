@@ -1,41 +1,61 @@
 {
-  "root": true,
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "parserOptions": {
+    // Required for certain syntax usages
+    "ecmaVersion": 2019
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:node/recommended",
     "plugin:security/recommended"
   ],
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [
-          ".ts"
-        ]
-      }
-    }
-  },
   "rules": {
-    "semi": [
+    "indent": [
       "error",
-      "always"
-    ],
-    "quotes": [
       2,
-      "single"
-    ],
-    "no-multiple-empty-lines": [
-      "error",
       {
-        "max": 2,
-        "maxEOF": 0
+        "VariableDeclarator": {
+          "let": 2,
+          "const": 3
+        }
+      }
+    ],
+    "no-label-var": "error",
+    "no-var": "error",
+    "no-new-object": "error",
+    "object-shorthand": 1,
+    "quote-props": [
+      "error",
+      "as-needed"
+    ],
+    "no-array-constructor": "error",
+    "prefer-template": "error",
+    "template-curly-spacing": [
+      "error",
+      "never"
+    ],
+    "no-useless-escape": "error",
+    "no-eval": "error",
+    "no-trailing-spaces": "error",
+    "no-console": [
+      "error"
+    ],
+    "key-spacing": [
+      2,
+      {
+        "singleLine": {
+          "beforeColon": false,
+          "afterColon": true
+        },
+        "multiLine": {
+          "beforeColon": true,
+          "afterColon": true,
+          "align": "colon"
+        }
       }
     ]
   }
