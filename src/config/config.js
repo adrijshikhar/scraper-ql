@@ -2,4 +2,4 @@
 
 const config = { port: process.env.APP_PORT || 4000 };
 
-modules.export = config;
+modules.export =Q config;
