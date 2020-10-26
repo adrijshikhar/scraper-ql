@@ -1,9 +1,10 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 
-const config = require('./config/config');
+import config from './config/config.js';
 
+const { port } = config;
 const app = express();
 
 app.use(express.json());
@@ -14,7 +15,7 @@ app.use(express.urlencoded({ extended: false })); // for proper parsing of query
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 
-app.listen(config.port, () => {
+app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.info(`App is listening on port ${config.port}`);
+  console.info(`App is listening on port ${port}`);
 });

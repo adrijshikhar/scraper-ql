@@ -7,16 +7,16 @@ import {
 import { HtmlPage } from '../resolvers';
 
 const schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'Query',
-    fields: {
-      scrape: {
-        type: HtmlPage,
+  query : new GraphQLObjectType({
+    name   : 'Query',
+    fields : {
+      scrape : {
+        type : HtmlPage,
         // `args` describes the arguments that the `scrape` query accepts
-        args: {
-          url: { type: GraphQLString }
+        args : {
+          url : { type: GraphQLString }
         },
-        resolve: function (_, { url }) {
+        resolve (_, { url }) {
           return {
             url
           };

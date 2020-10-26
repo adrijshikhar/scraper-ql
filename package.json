@@ -19,6 +19,10 @@
     "url": "https://github.com/adrijshikhar/hack-and-slash-graphql-2020/issues"
   },
   "homepage": "https://github.com/adrijshikhar/hack-and-slash-graphql-2020#readme",
+  "engines": {
+    "node": "10.x"
+  },
+  "type": "module",
   "devDependencies": {
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.12.0",

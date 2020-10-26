@@ -1,5 +1,3 @@
 /* eslint-disable no-undef */
 
-const config = { port: process.env.APP_PORT || 4000 };
-
-modules.export =Q config;
+export default { port: process.env.APP_PORT || 4000 };
