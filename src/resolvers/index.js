@@ -83,6 +83,28 @@ const HtmlPage = new GraphQLObjectType({
         return root.url;
       },
     },
+    links : {
+      type    : new GraphQLList(HtmlPage),
+      resolve : async (root, args, context) => {
+        const res = await fetch(root.url);
+        const $ = load(await res.text());
+        const links = $('a')
+          .map(function () {
+            if (!$(this).attr('href')) {
+              return;
+            }
+            if (
+              $(this).attr('href') !== '#' &&
+              $(this).attr('href').indexOf('http') > -1
+            ) {
+              return $(this).attr('href');
+            }
+          })
+          .get();
+
+        return links.map((url) => ({ url }));
+      },
+    },
   }),
 });
 
