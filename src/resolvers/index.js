@@ -105,6 +105,22 @@ const HtmlPage = new GraphQLObjectType({
         return links.map((url) => ({ url }));
       },
     },
+    hostname : {
+      type : GraphQLString,
+      resolve(root, args, context) {
+        // eslint-disable-next-line security/detect-unsafe-regex
+        const match = root.url.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+        return match && match[3];
+      }
+    },
+    title : {
+      type    : GraphQLString,
+      resolve : async (root, args, context) => {
+        const res = await fetch(root.url);
+        const $ = load(await res.text());
+        return $('title').text();
+      }
+    }
   }),
 });
 
