@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { load } from 'cheerio';
+import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
 
 import { validHTMLTags } from '../config/constants.js';
+
 const validAttributes = {
   id      : { type: GraphQLString },
   class   : { type: GraphQLString },
@@ -13,7 +14,7 @@ const validAttributes = {
 
 const getImgsForUrl = async (url) => {
   const res = await fetch(url);
-  const $ = load(await res.text());
+  const $ = cheerio.load(await res.text());
   return $('img')
     .map(function () {
       return $(this).attr('src');
@@ -36,14 +37,14 @@ const htmlFields = () =>
             args,
             url : root.url || root[0].url,
           };
-          return [...root, here];
+          return [here];
         },
       },
       content : {
         type    : GraphQLString,
         resolve : async (root, args, context) => {
           const res = await fetch(root[0].url);
-          const $ = load(await res.text());
+          const $ = cheerio.load(await res.text());
           const selector = root.reduce((prev, curr) => {
             let arg = '';
             if (curr.args.id) {
@@ -87,7 +88,7 @@ const HtmlPage = new GraphQLObjectType({
       type    : new GraphQLList(HtmlPage),
       resolve : async (root, args, context) => {
         const res = await fetch(root.url);
-        const $ = load(await res.text());
+        const $ = cheerio.load(await res.text());
         const links = $('a')
           .map(function () {
             if (!$(this).attr('href')) {
@@ -109,18 +110,20 @@ const HtmlPage = new GraphQLObjectType({
       type : GraphQLString,
       resolve(root, args, context) {
         // eslint-disable-next-line security/detect-unsafe-regex
-        const match = root.url.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+        const match = root.url.match(
+          /^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/
+        );
         return match && match[3];
-      }
+      },
     },
     title : {
       type    : GraphQLString,
       resolve : async (root, args, context) => {
         const res = await fetch(root.url);
-        const $ = load(await res.text());
+        const $ = cheerio.load(await res.text());
         return $('title').text();
-      }
-    }
+      },
+    },
   }),
 });
 

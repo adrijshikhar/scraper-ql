@@ -4,14 +4,14 @@ import {
   GraphQLString
 } from 'graphql';
 
-import { HtmlPage } from '../resolvers';
+import resolvers from '../resolvers/index.js';
 
 const schema = new GraphQLSchema({
   query : new GraphQLObjectType({
     name   : 'Query',
     fields : {
       scrape : {
-        type : HtmlPage,
+        type : resolvers.HtmlPage,
         // `args` describes the arguments that the `scrape` query accepts
         args : {
           url : { type: GraphQLString }
