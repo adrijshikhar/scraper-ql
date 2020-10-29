@@ -31,7 +31,7 @@ const htmlFields = () =>
         args : {
           ...validAttributes,
         },
-        resolve(root, args, context) {
+        resolve(root, args) {
           const here = {
             tag,
             args,
@@ -42,20 +42,26 @@ const htmlFields = () =>
       },
       content : {
         type    : GraphQLString,
-        resolve : async (root, args, context) => {
-          const res = await fetch(root[0].url);
+        resolve : async (root) => {
+          let url = root instanceof Array ? root[0].url : root.url;
+          const res = await fetch(url);
           const $ = cheerio.load(await res.text());
-          const selector = root.reduce((prev, curr) => {
-            let arg = '';
-            if (curr.args.id) {
-              arg = `#${curr.args.id}`;
-            } else if (curr.args.class) {
-              arg = `.${curr.args.class}`;
-            }
+          let selector = '';
+          if (typeof root === Array) {
+            selector = root.reduce((prev, curr) => {
+              let arg = '';
+              if (curr.args.id) {
+                arg = `#${curr.args.id}`;
+              } else if (curr.args.class) {
+                arg = `.${curr.args.class}`;
+              }
 
-            const ret = `${prev} ${curr.tag}${arg}`;
-            return ret;
-          }, '');
+              const ret = `${prev} ${curr.tag}${arg}`;
+              return ret;
+            }, '');
+          } else {
+            return $.html()
+          }
           return $(selector).html();
         },
       },
@@ -74,19 +80,19 @@ const HtmlPage = new GraphQLObjectType({
     ...htmlFields(),
     images : {
       type : new GraphQLList(GraphQLString),
-      resolve(root, args, context) {
+      resolve(root) {
         return getImgsForUrl(root.url);
       },
     },
     url : {
       type : GraphQLString,
-      resolve(root, args, context) {
+      resolve(root) {
         return root.url;
       },
     },
     links : {
       type    : new GraphQLList(HtmlPage),
-      resolve : async (root, args, context) => {
+      resolve : async (root) => {
         const res = await fetch(root.url);
         const $ = cheerio.load(await res.text());
         const links = $('a')
@@ -108,7 +114,7 @@ const HtmlPage = new GraphQLObjectType({
     },
     hostname : {
       type : GraphQLString,
-      resolve(root, args, context) {
+      resolve(root) {
         // eslint-disable-next-line security/detect-unsafe-regex
         const match = root.url.match(
           /^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/
@@ -118,7 +124,7 @@ const HtmlPage = new GraphQLObjectType({
     },
     title : {
       type    : GraphQLString,
-      resolve : async (root, args, context) => {
+      resolve : async (root) => {
         const res = await fetch(root.url);
         const $ = cheerio.load(await res.text());
         return $('title').text();
