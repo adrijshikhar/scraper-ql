@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/adrijshikhar/hack-and-slash-graphql-2020#readme",
   "engines": {
-    "node": ">=10.x"
+    "node": ">=14.x"
   },
   "keywords": [
     "ES",

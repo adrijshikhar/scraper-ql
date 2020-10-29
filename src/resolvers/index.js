@@ -47,7 +47,7 @@ const htmlFields = () =>
           const res = await fetch(url);
           const $ = cheerio.load(await res.text());
           let selector = '';
-          if (typeof root === Array) {
+          if (root instanceof Array) {
             selector = root.reduce((prev, curr) => {
               let arg = '';
               if (curr.args.id) {

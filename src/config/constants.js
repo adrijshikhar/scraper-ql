@@ -16,6 +16,7 @@ export const validHTMLTags = [
   'input',
   'ul',
   'li',
+  'ol'
 ];
 
 export default { validHTMLTags };
