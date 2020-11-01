@@ -36,6 +36,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-security": "^1.4.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2",
     "prettier-eslint": "^11.0.0"
@@ -51,5 +53,16 @@
     "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
     "node-fetch": "^2.6.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
