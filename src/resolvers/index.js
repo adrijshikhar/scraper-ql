@@ -85,7 +85,10 @@ const htmlFields = () =>
                       .text()
                       .trim()
                       .replace(/\s+/g, ' ');
-                    if (childContent !== '')
+                    if (
+                      childContent !== '' &&
+                      childContentArr.indexOf(childContent) === -1
+                    )
                       childContentArr = [...childContentArr, childContent];
                   });
                 content = childContentArr.join(', ');
