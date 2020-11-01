@@ -69,16 +69,15 @@ const htmlFields = () =>
                 const ret = `${prev} ${curr.tag}${arg}`;
                 return ret;
               }, '');
-            } else {
-              return $.html();
             }
+
             let ret = [];
             const childSelector = args ? args.filter : '';
-            $(selector).each(function (i) {
+            $(selector).each(function (i, pElem) {
               let content;
               if (childSelector) {
                 let childContentArr = [];
-                $(this)
+                $(pElem)
                   .find(childSelector)
                   .each((i, elem) => {
                     const childContent = $(elem)
@@ -93,7 +92,7 @@ const htmlFields = () =>
                   });
                 content = childContentArr.join(', ');
               } else {
-                content = $(this).text().trim().replace(/\s+/g, ' ');
+                content = $(pElem).text().trim().replace(/\s+/g, ' ');
               }
               if (content !== '') ret = [...ret, content];
             });
