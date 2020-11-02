@@ -18,6 +18,8 @@ export const validHTMLTags = [
   'li',
   'ol',
   'table',
+  'tr',
+  'td',
 ];
 
 export default { validHTMLTags };
