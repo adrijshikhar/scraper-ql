@@ -1,24 +1,23 @@
 {
-  "name": "hack-and-slash-graphql-2020",
+  "name": "scrapper-ql",
   "version": "1.0.0",
-  "description": "Our Hack and Slash GraphQL 2020 submission",
+  "description": "Scrapper based on GraphiQL",
   "main": "src/index.js",
   "scripts": {
-    "start": "node  -r dotenv/config src/index.js",
-    "dev": "nodemon  -r dotenv/config src/index.js",
-    "lint": "eslint ./src ",
-    "lint:fix": "eslint ./src --fix"
+    "start": "node --experimental-specifier-resolution=node -r dotenv/config src/index.js",
+    "dev": "nodemon --experimental-specifier-resolution=node -r dotenv/config src/index.js",
+    "lint": "eslint ./src "
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adrijshikhar/hack-and-slash-graphql-2020.git"
+    "url": "git+https://github.com/adrijshikhar/scrapper-ql.git"
   },
-  "author": "",
+  "author": "Adrij Shikhar",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/adrijshikhar/hack-and-slash-graphql-2020/issues"
+    "url": "https://github.com/adrijshikhar/scrapper-ql/issues"
   },
-  "homepage": "https://github.com/adrijshikhar/hack-and-slash-graphql-2020#readme",
+  "homepage": "https://github.com/adrijshikhar/scrapper-ql#readme",
   "engines": {
     "node": ">=14.x"
   },

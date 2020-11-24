@@ -1,176 +1,66 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable security/detect-unsafe-regex */
-/* eslint-disable no-unused-vars */
-import cheerio from 'cheerio';
-import fetch from 'node-fetch';
 import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
 
-import { validHTMLTags } from '../config/constants.js';
+import { initialState, validHTMLTags, validAttributes } from './constants';
+import contentResolver from './content_resolver';
+import tagResolver from './tag_resolver';
+import imageResolver from './image_resolver';
+import linksResolver from './links_resolver';
+import urlResolver from './url_resolver';
+import hostnameResolver from './hostname_resolver';
+import titleResolver from './title_resolver';
 
-const validAttributes = {
-  id      : { type: GraphQLString },
-  class   : { type: GraphQLString },
-  src     : { type: GraphQLString },
-  content : { type: GraphQLString },
-};
-
-const getImgsForUrl = async (url) => {
-  const res = await fetch(url);
-  const $ = cheerio.load(await res.text());
-  return $('img')
-    .map(function () {
-      return $(this).attr('src');
-    })
-    .get();
-};
-
-const htmlFields = () =>
+const HTMLFields = () =>
   validHTMLTags.reduce(
     (prev, tag) => ({
       ...prev,
-      [`${tag}`] : {
-        type : HtmlNode,
+      [tag] : {
+        type : HTMLNode,
         args : {
           ...validAttributes,
         },
-        resolve(root, args) {
-          args = args.class
-            ? { ...args, class: args.class.replace(/\s/g, '.') }
-            : args.class;
-          const here = {
-            tag,
-            args,
-            url : root instanceof Array ? root[0].url : root.url,
-          };
-          const ret = root instanceof Array ? [...root, here] : [here];
-          return ret;
-        },
+        resolve : (root, args) => tagResolver(root, args, tag),
       },
       content : {
         type    : new GraphQLList(GraphQLString),
         args    : { filter: { type: GraphQLString, defaultValue: '*' } },
-        resolve : async (root, args) => {
-          try {
-            let url = root instanceof Array ? root[0].url : root.url;
-            const res = await fetch(url);
-            const $ = cheerio.load(await res.text());
-            let selector = '';
-            if (root instanceof Array) {
-              selector = root.reduce((prev, curr) => {
-                let arg = '';
-                if (curr.args) {
-                  if (curr.args.id) {
-                    arg = `#${curr.args.id}`;
-                  } else if (curr.args.class) {
-                    arg = `.${curr.args.class}`;
-                  }
-                }
-
-                const ret = `${prev} ${curr.tag}${arg}`;
-                return ret;
-              }, '');
-            }
-
-            let ret = [];
-            const childSelector = args ? args.filter : '';
-            $(selector).each(function (i, pElem) {
-              let content;
-              if (childSelector) {
-                let childContentArr = [];
-                $(pElem)
-                  .find(childSelector)
-                  .each((i, elem) => {
-                    const childContent = $(elem)
-                      .text()
-                      .trim()
-                      .replace(/\s+/g, ' ');
-                    if (
-                      childContent !== '' &&
-                      childContentArr.indexOf(childContent) === -1
-                    )
-                      childContentArr = [...childContentArr, childContent];
-                  });
-                content = childContentArr.join(', ');
-              } else {
-                content = $(pElem).text().trim().replace(/\s+/g, ' ');
-              }
-              if (content !== '') ret = [...ret, content];
-            });
-            return ret;
-          } catch (error) {
-            console.log(error);
-            return;
-          }
-        },
+        resolve : contentResolver,
       },
     }),
-    {}
+    initialState.field
   );
 
-const HtmlNode = new GraphQLObjectType({
-  name   : 'HtmlNode',
-  fields : htmlFields,
+const HTMLNode = new GraphQLObjectType({
+  name   : 'HTMLNode',
+  fields : HTMLFields,
 });
 
-const HtmlPage = new GraphQLObjectType({
-  name   : 'HtmlPage',
+const HTMLPage = new GraphQLObjectType({
+  name   : 'HTMLPage',
   fields : () => ({
-    ...htmlFields(),
+    ...HTMLFields(),
     images : {
-      type : new GraphQLList(GraphQLString),
-      resolve(root) {
-        return getImgsForUrl(root.url);
-      },
+      type    : new GraphQLList(GraphQLString),
+      resolve : imageResolver,
     },
     url : {
-      type : GraphQLString,
-      resolve(root) {
-        return root.url;
-      },
+      type    : GraphQLString,
+      resolve : urlResolver,
     },
     links : {
-      type    : new GraphQLList(HtmlPage),
-      resolve : async (root) => {
-        const res = await fetch(root.url);
-        const $ = cheerio.load(await res.text());
-        const links = $('a')
-          .map(function () {
-            if (!$(this).attr('href')) {
-              return;
-            }
-            if (
-              $(this).attr('href') !== '#' &&
-              $(this).attr('href').indexOf('http') > -1
-            ) {
-              return $(this).attr('href');
-            }
-          })
-          .get();
-
-        return links.map((url) => ({ url }));
-      },
+      type    : new GraphQLList(HTMLPage),
+      resolve : linksResolver,
     },
     hostname : {
-      type : GraphQLString,
-      resolve(root) {
-        // eslint-disable-next-line security/detect-unsafe-regex
-        const match = root.url.match(
-          /^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/
-        );
-        return match && match[3];
-      },
+      type    : GraphQLString,
+      resolve : hostnameResolver,
     },
     title : {
       type    : GraphQLString,
-      resolve : async (root) => {
-        const res = await fetch(root.url);
-        const $ = cheerio.load(await res.text());
-        return $('title').text();
-      },
+      resolve : titleResolver,
     },
   }),
 });
 
 export default {
-  HtmlPage,
+  HTMLPage,
 };

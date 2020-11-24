@@ -42,7 +42,6 @@
     "no-useless-escape": "error",
     "no-eval": "error",
     "no-trailing-spaces": "error",
-
     "key-spacing": [
       2,
       {

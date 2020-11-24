@@ -1,7 +1,10 @@
-# hack-and-slash-graphql-2020
-Our Hack and Slash GraphQL 2020 submission
+# ScrapperQL
 
-- Install `yarn` and `node v14.15.0`
-- copy `.env.example` to `.env` and add port number
-- run `yarn` and then `yarn dev`
-- goto `http://localhost:<your port>`
+This is web scrapper based on the recursive feature of GraphQL
+
+## Setup
+
+- Install `node 15.2.1` using `nvm` and `yarn` package manager.
+- Copy `.env.example` to `.env` and add `PORT`.
+- Run `yarn dev` for development build.
+- Run `yarn start` for production build.

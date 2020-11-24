@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { graphqlHTTP } from 'express-graphql';
 
-import schema from './schema/index.js';
+import schema from './schema';
 
 import config from './config/config.js';
 
