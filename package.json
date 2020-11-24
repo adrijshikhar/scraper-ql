@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/adrijshikhar/scrapper-ql#readme",
   "engines": {
-    "node": ">=14.x"
+    "node": ">=15.x"
   },
   "keywords": [
     "ES",
