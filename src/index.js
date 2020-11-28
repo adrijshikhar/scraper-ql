@@ -3,10 +3,8 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { graphqlHTTP } from 'express-graphql';
 
-import schema from './schema';
-
 import config from './config/config.js';
-
+import graphqlConfig from './graphql_config';
 const { port } = config;
 const app = express();
 
@@ -20,9 +18,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 
 app.use('/', (req, res) => {
   graphqlHTTP({
-    schema,
-    pretty   : true,
-    graphiql : true,
+    ...graphqlConfig,
   })(req, res);
 });
 
