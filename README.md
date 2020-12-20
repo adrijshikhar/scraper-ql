@@ -1,6 +1,6 @@
-# ScrapperQL
+# ScraperQL
 
-This is web scrapper based on the recursive feature of GraphQL
+This is web scraper based on the recursive feature of GraphQL
 
 ## Setup
 
