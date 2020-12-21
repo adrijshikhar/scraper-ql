@@ -1,11 +1,9 @@
 import schema from './schema';
 
-const extensions = ({ variables, context }) => {
-  return {
-    runTime : Date.now() - context.startTime,
-    variables,
-  };
-};
+const extensions = ({ variables, context }) => ({
+  runTime : Date.now() - context.startTime,
+  variables,
+});
 
 const graphqlConfig = {
   schema,
