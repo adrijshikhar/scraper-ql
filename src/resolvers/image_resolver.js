@@ -11,8 +11,6 @@ export const getImgsForUrl = async (url) => {
     .get();
 };
 
-const imageResolver = (root) => {
-  return getImgsForUrl(root.url);
-};
+const imageResolver = (root) => getImgsForUrl(root.url);
 
 export default imageResolver;
