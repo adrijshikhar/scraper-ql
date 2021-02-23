@@ -1,7 +1,7 @@
 {
-  "name": "scrapper-ql",
+  "name": "scraper-ql",
   "version": "1.0.1",
-  "description": "Scrapper based on GraphiQL",
+  "description": "Web scraper based on GraphQL",
   "main": "src/index.js",
   "scripts": {
     "start": "node --experimental-specifier-resolution=node -r dotenv/config src/index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adrijshikhar/scrapper-ql.git"
+    "url": "git+https://github.com/adrijshikhar/scraper-ql.git"
   },
   "author": "Adrij Shikhar",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/adrijshikhar/scrapper-ql/issues"
+    "url": "https://github.com/adrijshikhar/scraper-ql/issues"
   },
-  "homepage": "https://github.com/adrijshikhar/scrapper-ql#readme",
+  "homepage": "https://github.com/adrijshikhar/scraper-ql#readme",
   "engines": {
     "node": ">=15.x"
   },
