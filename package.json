@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node --experimental-specifier-resolution=node -r dotenv/config src/index.js",
     "dev": "nodemon --experimental-specifier-resolution=node -r dotenv/config src/index.js",
-    "lint": "eslint ./src "
+    "lint": "eslint ./src ",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,7 @@
   },
   "homepage": "https://github.com/adrijshikhar/scraper-ql#readme",
   "engines": {
-    "node": ">=15.x"
+    "node": ">=16.x"
   },
   "keywords": [
     "ES",
