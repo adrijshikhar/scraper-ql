@@ -55,14 +55,6 @@
     "node-fetch": "^3.1.0"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "eslint --fix"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "*.js": "eslint --cache --fix"
   }
 }
