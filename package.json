@@ -51,7 +51,7 @@
     "express-graphql": "^0.12.0",
     "graphql": "^15.7.2",
     "jquery": "^3.6.0",
-    "jsdom": "^18.1.0",
+    "jsdom": "^18.1.1",
     "node-fetch": "^3.1.0"
   },
   "lint-staged": {
