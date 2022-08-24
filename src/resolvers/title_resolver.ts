@@ -1,9 +1,10 @@
-import cheerio from 'cheerio';
-import fetch from 'node-fetch';
+import { load } from 'cheerio';
+import fetch from '../api'
+
 
 const titleResolver = async (root) => {
   const res = await fetch(root.url);
-  const $ = cheerio.load(await res.text());
+  const $ = load(res);
   return $('title').text();
 };
 

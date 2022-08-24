@@ -1,6 +1,7 @@
 import { GraphQLSchema, GraphQLObjectType, GraphQLString } from 'graphql';
 
 import resolvers from '../resolvers';
+import MethodType from '../schema/MethodType';
 
 const schema = new GraphQLSchema({
   query : new GraphQLObjectType({
@@ -10,11 +11,13 @@ const schema = new GraphQLSchema({
         type : resolvers.HTMLPage,
         // `args` describes the arguments that the `scrape` query accepts
         args : {
-          url : { type: GraphQLString },
+          url           : { type: GraphQLString },
+          authorization : { type: GraphQLString },
+          method        : { type: MethodType, defaultValue: MethodType.getValue("GET") },
         },
-        resolve(_, { url }) {
+        resolve(_, { url, authorization, method }) {
           return {
-            url,
+            url, authorization, method
           };
         },
       },

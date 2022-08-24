@@ -48,6 +48,7 @@ const HTMLPage = new GraphQLObjectType({
     },
     links : {
       type    : new GraphQLList(HTMLPage),
+      args    : { filter: { type: GraphQLString, defaultValue: '*' } },
       resolve : linksResolver,
     },
     hostname : {

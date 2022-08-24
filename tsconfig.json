@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "es2021",
+            "dom"
+        ],
+        "target": "es6",
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "dist",
+        "declaration": true
+    },
+    "include": [
+        "src/**/*.ts"
+, "src/packages/@types/scraper-ql/types.d.ts"    ],
+    "exclude": [
+        "src/**/*.spec.ts",
+        "node_modules"
+    ]
+}

@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { graphqlHTTP } from 'express-graphql';
 
-import config from './config/config.js';
+import config from './config/config';
 import graphqlConfig from './graphql_config';
 const { port } = config;
 const app = express();
