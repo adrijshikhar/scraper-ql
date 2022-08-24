@@ -3,12 +3,8 @@ import { GraphQLFieldResolver } from 'graphql/type';
 import fetch from '../api'
 import { Args, RootSource } from 'scraper-ql-types';
 
-const linksResolver: GraphQLFieldResolver<RootSource, Args> = async (root, args) => {
-  console.log(root, args);
-  let headers = {};
-  headers = root.authorization ? { ...headers, Authorization: root.authorization } : {};
-  headers = root.method ? { ...headers, Authorization: root.authorization } : {};
-  const res = await fetch(root.url, { headers });
+const linksResolver: GraphQLFieldResolver<RootSource, Args> = async (root) => {
+  const res = await fetch(root.url);
   const $ = load(res);
   const links = $('a')
     .map(function () {
