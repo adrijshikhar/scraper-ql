@@ -14,7 +14,7 @@ const schema = new GraphQLSchema({
         },
         resolve(_, { url }) {
           return {
-            url,
+            url
           };
         },
       },

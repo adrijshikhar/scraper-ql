@@ -1,11 +1,13 @@
+import { OptionsData } from 'express-graphql';
 import schema from './schema';
 
-const extensions = ({ variables, context }) => ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const extensions: any = ({ variables, context }) => ({
   runTime : Date.now() - context.startTime,
   variables,
 });
 
-const graphqlConfig = {
+const graphqlConfig: OptionsData = {
   schema,
   context  : { startTime: Date.now() },
   pretty   : true,
@@ -27,4 +29,5 @@ const graphqlConfig = {
     path      : error.path,
   }),
 };
+
 export default graphqlConfig;

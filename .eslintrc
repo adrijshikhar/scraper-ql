@@ -1,7 +1,7 @@
 {
   "parserOptions": {
     // Required for certain syntax usages
-    "ecmaVersion": 2019,
+    "ecmaVersion": 2022,
     "sourceType": "module"
   },
   "env": {
@@ -11,8 +11,8 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:node/recommended",
-    "plugin:security/recommended"
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "indent": [

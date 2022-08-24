@@ -1,11 +1,14 @@
-import cheerio from 'cheerio';
-import fetch from 'node-fetch';
+import { load } from 'cheerio';
+import fetch from '../api'
+import { Args, RootSource } from 'scraper-ql-types';
+import { GraphQLFieldResolver } from 'graphql';
 
-const contentResolver = async (root, args) => {
+
+const contentResolver: GraphQLFieldResolver<RootSource, Args> = async (root, args) => {
   try {
-    let url = root instanceof Array ? root[0].url : root.url;
+    const url = root instanceof Array ? root[0].url : root.url;
     const res = await fetch(url);
-    const $ = cheerio.load(await res.text());
+    const $ = load(res);
     let selector = '';
     if (root instanceof Array) {
       selector = root.reduce((prev, curr) => {
