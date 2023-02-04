@@ -13,12 +13,13 @@
         "preserveConstEnums": true,
         "sourceMap": true,
         "forceConsistentCasingInFileNames": true,
-        "outDir": "dist",
+        "outDir": "public",
         "declaration": true
     },
     "include": [
-        "src/**/*.ts"
-, "src/packages/@types/scraper-ql/types.d.ts"    ],
+        "src/**/*.ts",
+        "src/packages/@types/scraper-ql/types.d.ts"
+    ],
     "exclude": [
         "src/**/*.spec.ts",
         "node_modules"
