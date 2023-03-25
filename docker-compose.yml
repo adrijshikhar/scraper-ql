@@ -2,9 +2,9 @@ version: '3'
 
 services:
   app:
-    image: adrijshikhar26/scraper-ql
+    image: adrijshikhar26/scraper-ql:main
     platform: linux/amd64
     build: .
     ports:
-      - "3000:3000"
+      - "3001:3000"
     container_name: scraper-ql

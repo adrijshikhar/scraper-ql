@@ -15,5 +15,8 @@ EXPOSE 3000
 # Define environment variable
 ENV PORT 3000
 
+# Build app
+RUN yarn build
+
 # Run app.js when the container launches
 CMD ["yarn", "start"]
