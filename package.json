@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "node -r dotenv/config public/index.js",
-    "build": "tsc -p .",
+    "build": "tsc --build --verbose",
     "dev": "nodemon -r dotenv/config src/index.ts",
     "lint": "eslint ./src ",
     "prepare": "husky install"
