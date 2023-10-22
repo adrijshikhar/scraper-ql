@@ -1,5 +1,7 @@
 # ScraperQL
 
+[![Build](https://github.com/adrijshikhar/scraper-ql/actions/workflows/build.yml/badge.svg)](https://github.com/adrijshikhar/scraper-ql/actions/workflows/build.yml)
+
 This is web scraper based on the recursive feature of GraphQL
 
 ## Setup
