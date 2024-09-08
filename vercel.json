@@ -1,20 +1,5 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "public/index.js",
-            "use": "@vercel/node",
-            "config": {
-                "includeFiles": [
-                    "public/**"
-                ]
-            }
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "public/index.js"
-        }
-    ]
+    "buildCommand": "yarn build",
+    "outputDirectory": "public"
 }
