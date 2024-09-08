@@ -9,7 +9,7 @@
     "build": "tsc --build --verbose",
     "dev": "nodemon -r dotenv/config src/index.ts",
     "lint": "eslint ./src ",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -33,10 +33,10 @@
   ],
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "5.62.0",
-    "@typescript-eslint/parser": "5.62.0",
-    "eslint": "^8.57.1",
+      "@types/express": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "8.4.0",
+    "@typescript-eslint/parser": "8.4.0",
+    "eslint": "^9.10.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -48,7 +48,7 @@
     "prettier-eslint": "^16.3.0"
   },
   "dependencies": {
-    "@types/node": "^22.7.7",
+    "@types/node": "^22.5.4",
     "@types/node-fetch": "^2.6.11",
     "body-parser": "^1.20.3",
     "cheerio": "^1.0.0",
@@ -68,5 +68,6 @@
   },
   "workspaces": [
     "packages/scraper-ql-types"
-  ]
+  ],
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
