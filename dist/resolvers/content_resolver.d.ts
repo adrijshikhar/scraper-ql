@@ -1,4 +1,4 @@
-import { Args, RootSource } from 'scraper-ql-types';
+import { Args, RootSource } from '../types';
 import { GraphQLFieldResolver } from 'graphql';
 declare const contentResolver: GraphQLFieldResolver<RootSource, Args>;
 export default contentResolver;
