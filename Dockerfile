@@ -1,4 +1,4 @@
-FROM node:18.18.2-slim
+FROM node:22.8.0-slim
 
 # Set the working directory to /app
 WORKDIR /app
@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . /app
 
 # Install any needed packages specified in package.json
-RUN yarn install --production
+RUN npm install 
 
 # Make port 3000 available to the world outside this container
 EXPOSE 3000
@@ -16,7 +16,7 @@ EXPOSE 3000
 ENV PORT 3000
 
 # Build app
-RUN yarn build
+RUN npm run build
 
 # Run app.js when the container launches
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
