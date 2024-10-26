@@ -4,11 +4,13 @@
   "description": "Web scraper based on GraphQL",
   "main": "src/index.js",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "rimraf dist && tsc --build --verbose",
     "dev": "nodemon -r dotenv/config src/index.ts",
     "ts.check": "tsc --project tsconfig.json",
-    "add-build": "git add dist"
+    "add-build": "git add dist",
+    "prepare": "husky install"
   },
   "pre-commit": [
     "ts.check",
@@ -35,11 +37,27 @@
     "MODULES",
     "JS"
   ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --quiet --fix"
+    ],
+    "*.{json,js,ts,jsx,tsx}": [
+      "prettier --write --ignore-unknown"
+    ]
+  },
   "devDependencies": {
+    "@eslint/js": "^9.13.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.11.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.10",
     "nodemon": "^3.1.7",
-    "rimraf": "^6.0.1"
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "typescript-eslint": "^8.11.0"
   },
   "dependencies": {
     "@types/node": "^22.7.7",
