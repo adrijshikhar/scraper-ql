@@ -1,6 +1,6 @@
 import { load } from 'cheerio';
 import fetch from '../api'
-import { Args, RootSource } from 'scraper-ql-types';
+import { Args, RootSource } from '../types';
 import { GraphQLFieldResolver } from 'graphql';
 
 

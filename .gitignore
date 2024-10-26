@@ -9,7 +9,4 @@ node_modules
 # error logs
 yarn-error.log
 
-dist
-
-public
 .vercel

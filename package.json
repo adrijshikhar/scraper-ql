@@ -5,12 +5,16 @@
   "main": "src/index.js",
   "private": true,
   "scripts": {
-    "start": "node -r dotenv/config public/index.js",
-    "build": "tsc --build --verbose",
+    "build": "rimraf dist && tsc --build --verbose",
     "dev": "nodemon -r dotenv/config src/index.ts",
-    "lint": "eslint ./src ",
-    "prepare": "husky install"
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/adrijshikhar/scraper-ql.git"
@@ -34,18 +38,8 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "5.62.0",
-    "@typescript-eslint/parser": "5.62.0",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-security": "^3.0.1",
-    "husky": "^9.1.6",
-    "lint-staged": "^15.2.10",
     "nodemon": "^3.1.7",
-    "prettier": "^3.3.3",
-    "prettier-eslint": "^16.3.0"
+    "rimraf": "^6.0.1"
   },
   "dependencies": {
     "@types/node": "^22.7.7",
@@ -56,15 +50,12 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-graphql": "^0.12.0",
-    "graphql": "^16.9.0",
+    "graphql": "^15.3.0",
     "jquery": "^3.7.1",
     "jsdom": "^25.0.1",
     "node-fetch": "^3.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
-  },
-  "lint-staged": {
-    "*.ts": "eslint --cache --fix"
   },
   "workspaces": [
     "packages/scraper-ql-types"

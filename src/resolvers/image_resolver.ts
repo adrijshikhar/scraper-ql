@@ -1,7 +1,7 @@
 import { load } from 'cheerio';
 import { GraphQLFieldResolver } from 'graphql';
 import fetch from '../api'
-import { Args, RootSource } from 'scraper-ql-types';
+import { Args, RootSource } from '../types';
 
 export const getImgsForUrl = async (url: string) => {
   const res = await fetch(url);

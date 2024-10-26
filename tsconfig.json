@@ -13,7 +13,7 @@
         "preserveConstEnums": true,
         "sourceMap": true,
         "forceConsistentCasingInFileNames": true,
-        "outDir": "public",
+        "outDir": "dist",
         "declaration": true
     },
     "include": [

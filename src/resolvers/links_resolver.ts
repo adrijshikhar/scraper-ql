@@ -1,7 +1,7 @@
 import { load } from 'cheerio';
 import { GraphQLFieldResolver } from 'graphql/type';
 import fetch from '../api'
-import { Args, RootSource } from 'scraper-ql-types';
+import { Args, RootSource } from '../types';
 
 const linksResolver: GraphQLFieldResolver<RootSource, Args> = async (root) => {
   const res = await fetch(root.url);
