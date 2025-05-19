@@ -61,7 +61,7 @@
     "typescript-eslint": "^8.32.1"
   },
   "dependencies": {
-    "@types/node": "^22.15.18",
+    "@types/node": "^22.15.19",
     "@types/node-fetch": "^2.6.12",
     "body-parser": "^2.2.0",
     "cheerio": "^1.0.0",
