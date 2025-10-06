@@ -74,7 +74,7 @@
     "jsdom": "^27.0.0",
     "node-fetch": "^3.3.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "workspaces": [
     "packages/scraper-ql-types"
